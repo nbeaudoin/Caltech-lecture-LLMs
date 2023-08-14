@@ -14,7 +14,7 @@ prompt = PromptTemplate(template=template, input_variables=["question"])
 
 # Create LLM
 llm = OpenAI()
-llm = OpenAI(openai_api_key="OPENAI_API_KEY")
+llm = OpenAI(openai_api_key=OPENAI_API_KEY)
 
 # Chain things together
 llm_chain = LLMChain(prompt=prompt, llm=llm)
