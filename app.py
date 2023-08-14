@@ -1,30 +1,26 @@
 import os
 from dotenv import load_dotenv
-from langchain.llms import OpenAI
-from langchain import PromptTemplate, LLMChain
+import openai
 
 # Load credentuals
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+openai.api_key = OPENAI_API_KEY
 
-# Build template
-template = """Question: {question}
-Answer: Let's think step by step."""
-prompt = PromptTemplate(template=template, input_variables=["question"])
+prompt = "Tell me a joke"
 
-# Create LLM
-llm = OpenAI()
-llm = OpenAI(openai_api_key=OPENAI_API_KEY)
+completion = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", 
+     "content": "You are a helpfu assistant"},
+    {"role": "user", 
+     "content": prompt}
+  ],
+  temperature=0,
+  top_p=.1
+)
 
-# Chain things together
-llm_chain = LLMChain(prompt=prompt, llm=llm)
-
-# Ask a question
-question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
-
-# Run the result
-print(llm_chain.run(question))
-
-
+print(completion.choices[0].message.content)
 
 
