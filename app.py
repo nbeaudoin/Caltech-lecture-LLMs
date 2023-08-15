@@ -18,8 +18,8 @@ completion = openai.ChatCompletion.create(
      "content": prompt}
   ],
   temperature=0,
-  top_p=0,
-  max_tokens=50
+  top_p=1,
+  max_tokens=100
 )
 
 print(completion.choices[0].message.content)
