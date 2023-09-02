@@ -19,7 +19,7 @@ title_template = PromptTemplate(
     template='Write me a children\'s story about {topic} that takes place at Caltech'
 )
 
-llm = OpenAI(temperature=.7,
+llm = OpenAI(temperature=2,
              max_tokens=100,
              )
 
